@@ -1,0 +1,25 @@
+#
+# ADDITIONAL_DEFAULT_PROPERTIES
+#
+ro.asus.persistent=/factory/AntiTheft.file
+ro.gnss.sv.status=true
+persist.fwlog.enable=1
+persist.stm.dvc.mid_disabled=punit
+ro.opengles.version=196608
+persist.dual_sim=none
+sys.usb.vbus=normal
+ro.sf.lcd_density=480
+wifi.version.driver=6.37.32.RC23.34.22
+gps.version.driver=29.19.15.220149
+bt.version.driver=V10.00.01
+ro.secure=1
+ro.allow.mock.location=0
+ro.debuggable=0
+ro.zygote=zygote32
+persist.sys.usb.config=mtp
+ro.dalvik.vm.native.bridge=libhoudini.so
+ro.adb.secure=1
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
+dalvik.vm.image-dex2oat-Xms=64m
+dalvik.vm.image-dex2oat-Xmx=64m

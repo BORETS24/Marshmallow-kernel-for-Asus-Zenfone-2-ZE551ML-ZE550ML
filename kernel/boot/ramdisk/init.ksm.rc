@@ -1,0 +1,3 @@
+on boot
+# UKSM tuning   
+    write /sys/kernel/mm/uksm/run 0
