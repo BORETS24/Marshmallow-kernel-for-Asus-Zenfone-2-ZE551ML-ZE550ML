@@ -43,7 +43,7 @@
 #include <asm/intel-mid.h>
 #include "ftxxxx_ts.h"
 #include "ftxxxx_ex_fun.h"
-#include "../../drivers/external_drivers/drivers/i2c/busses/i2c-designware-core.h"
+#include "../../external_drivers/drivers/i2c/busses/i2c-designware-core.h"
 
 //#include <mach/gpio.h>
 //#include <mach/map.h>
@@ -935,28 +935,28 @@ static int fts_init_gpio_hw(struct ftxxxx_ts_data *ftxxxx_ts)
 }
 
 //usb_cable_status+
-void ftxxxx_usb_detection(bool plugin)
-{
-	if (check_ts == NULL) {
-		printk("[ftxxxx][TOUCH_ERR] %s : ftxxxx_ts is null, skip \n", __func__);
-		return;
-	}
+//void ftxxxx_usb_detection(bool plugin)
+//{
+//	if (check_ts == NULL) {
+//		printk("[ftxxxx][TOUCH_ERR] %s : ftxxxx_ts is null, skip \n", __func__);
+//		return;
+//	}
 
 	
-	if (plugin) {
-		check_ts->usb_status = 1; /*AC plug in*/
-		printk("ftxxxx usb_status = %d\n", check_ts->usb_status);
-	}
-	else {
-		check_ts->usb_status = 0;	/*no AC */
-		printk("ftxxxx usb_status = %d\n", check_ts->usb_status);
-	}
-	queue_work(check_ts->usb_wq, &check_ts->usb_detect_work);
+//	if (plugin) {
+//		check_ts->usb_status = 1; /*AC plug in*/
+//		printk("ftxxxx usb_status = %d\n", check_ts->usb_status);
+//	}
+//	else {
+//		check_ts->usb_status = 0;	/*no AC */
+//		printk("ftxxxx usb_status = %d\n", check_ts->usb_status);
+//	}
+//	queue_work(check_ts->usb_wq, &check_ts->usb_detect_work);
+//	
 	
-	
-}
+//}
 
-static void ftxxxx_cable_status(struct work_struct *work)
+/*static void ftxxxx_cable_status(struct work_struct *work)
 {
 	struct ftxxxx_ts_data *ftxxxx_ts = container_of(work, struct ftxxxx_ts_data, usb_detect_work);
 	
@@ -969,21 +969,21 @@ static void ftxxxx_cable_status(struct work_struct *work)
 	printk("[ftxxxx] cable_status=%d.\n", status);
 
 	if (status == 0) {	/*no AC */
-		buf[0] = 0x8B;
-		buf[1] = 0x00;
-		ftxxxx_write_reg(ftxxxx_ts->client, buf[0], buf[1]);
-	} else if (status == 1) {	/*AC plug in*/
-		buf[0] = 0x8B;
-		buf[1] = 0x01;
-		ftxxxx_write_reg(ftxxxx_ts->client, buf[0], buf[1]);
-	}
+		//buf[0] = 0x8B;
+		//buf[1] = 0x00;
+		//ftxxxx_write_reg(ftxxxx_ts->client, buf[0], buf[1]);
+	//} else if (status == 1) {	/*AC plug in*/
+	//	buf[0] = 0x8B;
+	//	buf[1] = 0x01;
+	//	ftxxxx_write_reg(ftxxxx_ts->client, buf[0], buf[1]);
+	//}
 	
 
-	mutex_unlock(&ftxxxx_ts->mutex_lock);
-	wake_unlock(&ftxxxx_ts->wake_lock);
+	//mutex_unlock(&ftxxxx_ts->mutex_lock);
+	//wake_unlock(&ftxxxx_ts->wake_lock);
 
-	return;
-}
+	//return;
+//}
 //usb_cable_status-
 
 static void fts_un_init_gpio_hw(struct ftxxxx_ts_data *ftxxxx_ts)
@@ -1285,8 +1285,8 @@ static int ftxxxx_ts_probe(struct i2c_client *client, const struct i2c_device_id
 		err = -ENOMEM;
 		goto exit_create_wq_failed;
 	}
-	INIT_WORK(&ftxxxx_ts->usb_detect_work, ftxxxx_cable_status);
-	printk("\n[ftxxxx] Create usb detect workqueue success\n");
+	//INIT_WORK(&ftxxxx_ts->usb_detect_work, ftxxxx_cable_status);
+	//printk("\n[ftxxxx] Create usb detect workqueue success\n");
 	
 	mutex_init(&ftxxxx_ts->mutex_lock);
 	wake_lock_init(&ftxxxx_ts->wake_lock, WAKE_LOCK_SUSPEND, "ftxxxx_wake_lock");

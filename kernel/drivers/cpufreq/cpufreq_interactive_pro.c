@@ -140,7 +140,7 @@ static bool io_is_busy;
  * up_threshold_any_cpu_freq then do not let the frequency to drop below
  * sync_freq
  */
-static unsigned int up_threshold_any_cpu_load = 35;
+static unsigned int up_threshold_any_cpu_load = 40;
 static unsigned int sync_freq = 583000;
 static unsigned int up_threshold_any_cpu_freq = 1583000;
 /* Round to starting jiffy of next evaluation window */

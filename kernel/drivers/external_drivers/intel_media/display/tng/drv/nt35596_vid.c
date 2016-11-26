@@ -1503,10 +1503,15 @@ static int nt35596_vid_reset(struct mdfld_dsi_config *dsi_config)
 static int nt35596_vid_set_brightness(struct mdfld_dsi_config *dsi_config,
 					 int level)
 {
-	u32 reg_level = ~level & 0xFF;
+	u32 reg_level;
 	union pwmctrl_reg pwmctrl;
 	static void __iomem *bl_en_mmio;
 
+	/* Re-assign the minimum brightness value to 15 */
+	//if (level > 0 && level <= 15)
+	//	level = 15;
+
+	reg_level = ~level & 0xFF;
 	pwmctrl.part.pwmswupdate = 0x1;
 	pwmctrl.part.pwmbu = PWM_BASE_UNIT;
 	pwmctrl.part.pwmtd = reg_level;
@@ -1528,10 +1533,12 @@ static int nt35596_vid_set_brightness(struct mdfld_dsi_config *dsi_config,
 			pwmctrl.part.pwmenable = 1;
 			writel(pwmctrl.full, pwmctrl_mmio);
 		} else if (gpio_get_value(backlight_en_gpio)) {
-			writel(pwmctrl.full, pwmctrl_mmio);
 			pwmctrl.part.pwmenable = 0;
-			gpio_set_value_cansleep(backlight_en_gpio, 0);
+			writel(pwmctrl.full, pwmctrl_mmio);
+			gpio_set_value_cansleep(backlight_pwm_gpio, 0);
 			lnw_gpio_set_alt(backlight_pwm_gpio, 0);
+			usleep_range(10000, 10100);
+			gpio_set_value_cansleep(backlight_en_gpio, 0);
 			writel((readl(bl_en_mmio) | PULL_DOWN_EN) & (~PULL_UP_EN), bl_en_mmio);
 			pmu_set_pwm(PCI_D3hot);
 		}
@@ -1543,7 +1550,6 @@ static int nt35596_vid_set_brightness(struct mdfld_dsi_config *dsi_config,
 
 	return 0;
 }
-
 
 struct drm_display_mode *nt35596_vid_get_config_mode(void)
 {

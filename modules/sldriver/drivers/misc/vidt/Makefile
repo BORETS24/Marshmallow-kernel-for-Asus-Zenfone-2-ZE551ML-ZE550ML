@@ -1,4 +1,4 @@
-LDFLAGS := -T $(ANDROID_BUILD_TOP)/home/borets/linux/modules/sldriver/elf_i386.lds
+LDFLAGS := -T $(ANDROID_BUILD_TOP)/linux/modules/sldriver/elf_i386.lds
 EXTRA_CFLAGS :=-fno-pic
 TARGET_MODULE += vidt_driver
 

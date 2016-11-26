@@ -1533,7 +1533,7 @@ static int cpufreq_governor_interactive(struct cpufreq_policy *policy,
 		tunables->iowait_load_threshold_val = DEFAULT_IOWAIT_LOAD_THRESHOLD;
 #endif /* CONFIG_IRQ_TIME_ACCOUNTING */
 		if (boot_boost)
-			tunables->boost_val = 1;
+		//	tunables->boost_val = 1;
 
 		spin_lock_init(&tunables->target_loads_lock);
 		spin_lock_init(&tunables->above_hispeed_delay_lock);
@@ -1585,7 +1585,7 @@ static int cpufreq_governor_interactive(struct cpufreq_policy *policy,
 			tunables->hispeed_freq = policy->max;
 
 		if (!tunables->touchboost_freq)
-			tunables->touchboost_freq = 1333000;
+			tunables->touchboost_freq = policy->max;
 		for_each_cpu(j, policy->cpus) {
 			pcpu = &per_cpu(cpuinfo, j);
 			pcpu->policy = policy;

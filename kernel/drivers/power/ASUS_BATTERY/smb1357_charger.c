@@ -152,7 +152,7 @@ extern struct battery_info_reply batt_info;
 extern unsigned int query_cable_status(void);
 extern int boot_mode;
 #ifdef CONFIG_TOUCHSCREEN_FTXXXX
-extern void ftxxxx_usb_detection(bool plugin); //usb_cable_status : write touch reg 0x8B
+//extern void ftxxxx_usb_detection(bool plugin); //usb_cable_status : write touch reg 0x8B
 #endif
 struct wake_lock wakelock_cable, wakelock_cable_t;
 int early_suspend_flag=0;
@@ -686,14 +686,14 @@ int setSMB1357Charger(int usb_state)
 	case AC_IN:
 		CHR_INFO("usb_state: AC_IN\n");
 		#ifdef CONFIG_TOUCHSCREEN_FTXXXX
-		ftxxxx_usb_detection(true);
+		//ftxxxx_usb_detection(true);
 		#endif
 		usb_to_battery_callback(USB_ADAPTER);
 		break;
 	case CABLE_OUT:
 		CHR_INFO("usb_state: CABLE_OUT\n");
 		#ifdef CONFIG_TOUCHSCREEN_FTXXXX
-		ftxxxx_usb_detection(false);
+		//ftxxxx_usb_detection(false);
 		#endif
 		usb_to_battery_callback(NO_CABLE);
 		break;

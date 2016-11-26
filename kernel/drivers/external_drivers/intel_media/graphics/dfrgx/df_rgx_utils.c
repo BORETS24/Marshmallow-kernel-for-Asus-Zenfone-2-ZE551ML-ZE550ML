@@ -36,7 +36,7 @@ struct gpu_freq_thresholds a_governor_profile[] = {
 			/* low, high thresholds for Power Save profile*/
 			{80, 95},
 			/* low, high Custom thresholds */
-			{67, 85},
+			{37, 53},
 			/* low, high Performance */
 			{25, 45}
 			};
